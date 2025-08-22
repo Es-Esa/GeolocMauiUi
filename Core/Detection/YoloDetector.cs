@@ -123,14 +123,17 @@ namespace ClientApp.Core.Detection
 						imageWidth: YoloSettings.Input.SideLength,
 						imageHeight: YoloSettings.Input.SideLength
 				);
-				var pipelineExtractPixels = pipelineResizeImages.Append(
-					_context.Transforms.ExtractPixels(
-						inputColumnName: YoloSettings.LayerNames.Input,
-						outputColumnName: YoloSettings.LayerNames.Input,
-						interleavePixelColors: false,
-						scaleImage: 1f / 255f
-					)
-				);
+                                var pipelineExtractPixels = pipelineResizeImages.Append(
+                                        _context.Transforms.ExtractPixels(
+                                                inputColumnName: YoloSettings.LayerNames.Input,
+                                                outputColumnName: YoloSettings.LayerNames.Input,
+                                                interleavePixelColors: false,
+                                                colorsToExtract: ImagePixelExtractingEstimator.ColorBits.Blue |
+                                                                ImagePixelExtractingEstimator.ColorBits.Green |
+                                                                ImagePixelExtractingEstimator.ColorBits.Red,
+                                                scaleImage: 1f / 255f
+                                        )
+                                );
 				var pipelineApplyOnnxModel = pipelineExtractPixels.Append(
 					_context.Transforms.ApplyOnnxModel(
 						modelFile: modelFilePath,
