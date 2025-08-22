@@ -2,68 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ClientApp.Views.MainPage">
-
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="15">
-
-            <Label
-                Text="Drone Image Analysis"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
-            <Button
-                Text="Select Image"
-                Command="{Binding SelectImageCommand}"
-                IsEnabled="{Binding IsSelectImageEnabled}"
-                HorizontalOptions="Fill" />
-
-            <Image
-                HeightRequest="250"
-                Aspect="AspectFit"
-                BackgroundColor="LightGray"
-                Margin="0,10,0,10"
-                Source="{Binding SelectedImage}" />
-
-            <ActivityIndicator
-                IsRunning="{Binding IsBusy}"
-                IsVisible="{Binding IsBusy}"
-                HorizontalOptions="Center"
-                VerticalOptions="Center" />
-
-            <Button
-                Text="Analyze Image"
-                Command="{Binding AnalyzeCommand}"
-                IsEnabled="{Binding IsAnalyzeEnabled}"
-                HorizontalOptions="Fill" />
-
-            <Label
-                Text="Detections:"
-                Style="{StaticResource SubHeadline}"
-                Margin="0,10,0,5"/>
-
-            <ListView ItemsSource="{Binding Results}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
-            <Button
-                Text="Open Live Camera Detection"
-                Command="{Binding LiveDetectCommand}"
-                Margin="0,20,0,0"
-                HorizontalOptions="Fill" />
-
-            <Button
-                Text="View Sightings Map"
-                Command="{Binding ViewMapCommand}"
-                Margin="0,10,0,0"
-                HorizontalOptions="Fill" />
-
+        <VerticalStackLayout Padding="30,0" Spacing="15">
+            <Label Text="Welcome" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
+            <Label Text="Use the tabs below to navigate." />
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>
