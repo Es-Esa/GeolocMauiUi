@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI" 
+             x:Class="ClientApp.Views.CameraDetectionPage"
+             xmlns:views="clr-namespace:ClientApp.Views"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             Title="Live Detection">
+
+    <Grid>
+        <!-- Camera View to display the feed -->
+        <cv:CameraView 
+            x:Name="cameraView"
+            CamerasLoaded="CameraView_CamerasLoaded"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand" 
+            AutoStartPreview="False" 
+            AutoSnapShotAsImageSource="False" 
+            />
+        
+        <!-- Replace GraphicsView with SKCanvasView -->
+        <skia:SKCanvasView 
+            x:Name="canvasView" 
+            PaintSurface="OnCanvasViewPaintSurface" 
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            IgnorePixelScaling="True"
+            InputTransparent="True" /> 
+            
+        <!-- Optional: Add buttons or labels if needed -->
+        <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
+             <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10"/>
+        </VerticalStackLayout>
+
+    </Grid>
+</ContentPage> 

@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net9.0-android;net9.0-ios;net9.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net9.0-windows10.0.19041.0</TargetFrameworks>
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net9.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst: Ensure the Identifier is unique - random value below -->
+		<CodesignKey>C8DC1D2F-7CBD-4B8A-B9C3-A81551484C25</CodesignKey>
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>ClientApp</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>ClientApp</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.geoloc.clientapp</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Debug' AND '$(TargetFramework)'=='net9.0-android'">
+		<EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the map.html if it exists) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Camera.MAUI" Version="1.4.4" />
+		<!-- Add back Microsoft Maps -->
+		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="9.0.50" />
+		<!-- Remove non-existent OpenSource package -->
+		<!-- <PackageReference Include="Microsoft.Maui.Controls.OpenSource" Version="9.0.50" /> -->
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-preview.3.24172.9" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.8" />
+		<!-- Remove Mapsui -->
+		<!-- <PackageReference Include="Mapsui.Maui" Version="4.1.9" /> -->
+		<!-- Restore ML packages -->
+		<PackageReference Include="Microsoft.ML" Version="4.0.0" />
+		<PackageReference Include="Microsoft.ML.ImageAnalytics" Version="4.0.0" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1" />
+		<PackageReference Include="Microsoft.ML.OnnxTransformer" Version="4.0.0" />
+		<!-- Restore Spatial package -->
+		<PackageReference Include="Microsoft.Spatial" Version="8.2.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ClientApp.Core\ClientApp.Core.csproj" />
+	</ItemGroup>
+
+</Project>

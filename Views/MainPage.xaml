@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClientApp.Views.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,0"
+            Spacing="15">
+
+            <Label
+                Text="Drone Image Analysis"
+                Style="{StaticResource Headline}"
+                SemanticProperties.HeadingLevel="Level1" />
+
+            <Button
+                x:Name="SelectImageBtn"
+                Text="Select Image"
+                Clicked="OnSelectImageClicked"
+                HorizontalOptions="Fill" />
+
+            <Image
+                x:Name="SelectedImage"
+                HeightRequest="250"
+                Aspect="AspectFit"
+                BackgroundColor="LightGray"
+                Margin="0,10,0,10" />
+
+             <ActivityIndicator
+                x:Name="LoadingIndicator"
+                IsRunning="False"
+                IsVisible="False"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+            <Button
+                x:Name="AnalyzeBtn"
+                Text="Analyze Image"
+                Clicked="OnAnalyzeClicked"
+                IsEnabled="False" 
+                HorizontalOptions="Fill" />
+
+            <Label
+                Text="Detections:"
+                Style="{StaticResource SubHeadline}"
+                Margin="0,10,0,5"/>
+
+            <ListView x:Name="ResultsListView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding}" /> 
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Button
+                Text="Open Live Camera Detection"
+                Clicked="OnLiveDetectClicked"
+                Margin="0,20,0,0"
+                HorizontalOptions="Fill" />
+
+            <Button
+                Text="View Sightings Map"
+                Clicked="OnViewMapClicked"
+                Margin="0,10,0,0"
+                HorizontalOptions="Fill" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
