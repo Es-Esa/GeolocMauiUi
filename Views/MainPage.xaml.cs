@@ -217,7 +217,7 @@ namespace ClientApp.Views
 
 
         /// <summary>
-        /// Tämä metodi avaa kameran ja live havaintoonnin.
+        /// Tämä metodi avaa kameran ja live havainnoinnin.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
