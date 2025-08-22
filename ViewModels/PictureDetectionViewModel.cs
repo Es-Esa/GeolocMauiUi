@@ -2,7 +2,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using ClientApp.Core.Detection;
-using ClientApp.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
@@ -10,7 +9,7 @@ using Microsoft.Maui.Media;
 
 namespace ClientApp.ViewModels;
 
-public partial class MainPageViewModel : ObservableObject
+public partial class PictureDetectionViewModel : ObservableObject
 {
     private readonly IObjectDetector _objectDetector;
     private bool _isModelInitialized;
@@ -30,7 +29,7 @@ public partial class MainPageViewModel : ObservableObject
 
     public ObservableCollection<string> Results { get; } = new();
 
-    public MainPageViewModel(IObjectDetector objectDetector)
+    public PictureDetectionViewModel(IObjectDetector objectDetector)
     {
         _objectDetector = objectDetector;
     }
@@ -174,12 +173,6 @@ public partial class MainPageViewModel : ObservableObject
     }
 
     private bool CanAnalyze() => !IsBusy && _isModelInitialized && _selectedImageStream != null;
-
-    [RelayCommand]
-    private async Task LiveDetectAsync() => await Shell.Current.GoToAsync(nameof(CameraDetectionPage));
-
-    [RelayCommand]
-    private async Task ViewMapAsync() => await Shell.Current.GoToAsync(nameof(MapPage));
 
     private void ClearSelectedImage()
     {

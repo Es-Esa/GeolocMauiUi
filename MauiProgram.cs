@@ -30,10 +30,11 @@ namespace ClientApp
             builder.Services.AddSingleton<IObjectDetector, YoloDetector>();
             builder.Services.AddSingleton<ILocationService, LocationService>();
             builder.Services.AddSingleton<ISightingRepository, InMemorySightingRepository>();
-            builder.Services.AddSingleton<MainPageViewModel>();
+            builder.Services.AddSingleton<PictureDetectionViewModel>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<CameraDetectionPage>();
             builder.Services.AddTransient<MapPage>();
+            builder.Services.AddTransient<PictureDetectionPage>();
 
 #if DEBUG
     		builder.Logging.AddDebug();
