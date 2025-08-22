@@ -65,16 +65,17 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-preview.3.24172.9" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.8" />
-		<!-- Remove Mapsui -->
-		<!-- <PackageReference Include="Mapsui.Maui" Version="4.1.9" /> -->
-		<!-- Restore ML packages -->
-		<PackageReference Include="Microsoft.ML" Version="4.0.0" />
-		<PackageReference Include="Microsoft.ML.ImageAnalytics" Version="4.0.0" />
-		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1" />
-		<PackageReference Include="Microsoft.ML.OnnxTransformer" Version="4.0.0" />
-		<!-- Restore Spatial package -->
+                <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+                <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.8" />
+                <!-- Remove Mapsui -->
+                <!-- <PackageReference Include="Mapsui.Maui" Version="4.1.9" /> -->
+                <!-- Restore ML packages -->
+                <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+                <PackageReference Include="Microsoft.ML" Version="4.0.0" />
+                <PackageReference Include="Microsoft.ML.ImageAnalytics" Version="4.0.0" />
+                <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.20.1" />
+                <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="4.0.0" />
+                <!-- Restore Spatial package -->
 		<PackageReference Include="Microsoft.Spatial" Version="8.2.3" />
 	</ItemGroup>
 
