@@ -2,6 +2,7 @@
 using ClientApp.Core.Detection;
 using Camera.MAUI;
 using ClientApp.Views;
+using ClientApp.ViewModels;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using Microsoft.Maui.Controls.Maps;
 using ClientApp.Core.Services;
@@ -29,7 +30,7 @@ namespace ClientApp
             builder.Services.AddSingleton<IObjectDetector, YoloDetector>();
             builder.Services.AddSingleton<ILocationService, LocationService>();
             builder.Services.AddSingleton<ISightingRepository, InMemorySightingRepository>();
-
+            builder.Services.AddSingleton<MainPageViewModel>();
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddTransient<CameraDetectionPage>();
             builder.Services.AddTransient<MapPage>();
