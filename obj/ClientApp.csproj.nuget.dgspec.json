@@ -71,6 +71,10 @@
               "target": "Package",
               "version": "[1.4.4, )"
             },
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.0, )"
@@ -153,6 +157,10 @@
             "Camera.MAUI": {
               "target": "Package",
               "version": "[1.4.4, )"
+            },
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
@@ -237,6 +245,10 @@
               "target": "Package",
               "version": "[1.4.4, )"
             },
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[8.1.0, )"
+            },
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.0, )"
@@ -320,6 +332,10 @@
             "Camera.MAUI": {
               "target": "Package",
               "version": "[1.4.4, )"
+            },
+            "CommunityToolkit.Maui": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             },
             "CommunityToolkit.Mvvm": {
               "target": "Package",

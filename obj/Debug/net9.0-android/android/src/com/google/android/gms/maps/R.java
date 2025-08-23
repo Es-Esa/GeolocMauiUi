@@ -44,7 +44,7 @@ public final class R {
 		public static final int none = 0x7f08015c;
 		public static final int normal = 0x7f08015d;
 		public static final int satellite = 0x7f080194;
-		public static final int terrain = 0x7f0801e3;
+		public static final int terrain = 0x7f0801e4;
 	}
 	public static final class styleable {
 		public static final int[] MapAttrs = new int[] { 0x7f030035, 0x7f03004f, 0x7f0300a3, 0x7f0300a4, 0x7f0300a5, 0x7f0300a6, 0x7f0300a7, 0x7f0300a8, 0x7f0300a9, 0x7f030298, 0x7f030299, 0x7f03029a, 0x7f03029b, 0x7f0302fc, 0x7f030301, 0x7f030302, 0x7f030303, 0x7f030513, 0x7f030514, 0x7f030515, 0x7f030516, 0x7f030517, 0x7f030518, 0x7f030519, 0x7f03051a, 0x7f030520, 0x7f03053f };

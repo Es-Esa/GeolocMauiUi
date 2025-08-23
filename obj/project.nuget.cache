@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ZlaOh3wLNSU=",
+  "dgSpecHash": "KGrDrDos0ws=",
   "success": true,
   "projectFilePath": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Esa\\.nuget\\packages\\camera.maui\\1.4.4\\camera.maui.1.4.4.nupkg.sha512",
+    "C:\\Users\\Esa\\.nuget\\packages\\communitytoolkit.maui\\9.0.0\\communitytoolkit.maui.9.0.0.nupkg.sha512",
+    "C:\\Users\\Esa\\.nuget\\packages\\communitytoolkit.maui.core\\9.0.0\\communitytoolkit.maui.core.9.0.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\communitytoolkit.mvvm\\8.2.0\\communitytoolkit.mvvm.8.2.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\google.protobuf\\3.27.1\\google.protobuf.3.27.1.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\googlegson\\2.11.0.5\\googlegson.2.11.0.5.nupkg.sha512",
@@ -21,6 +23,7 @@
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.io.recyclablememorystream\\3.0.1\\microsoft.io.recyclablememorystream.3.0.1.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls\\9.0.50\\microsoft.maui.controls.9.0.50.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls.build.tasks\\9.0.50\\microsoft.maui.controls.build.tasks.9.0.50.nupkg.sha512",
+    "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls.compatibility\\8.0.14\\microsoft.maui.controls.compatibility.8.0.14.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls.core\\9.0.50\\microsoft.maui.controls.core.9.0.50.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls.maps\\9.0.50\\microsoft.maui.controls.maps.9.0.50.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.maui.controls.xaml\\9.0.50\\microsoft.maui.controls.xaml.9.0.50.nupkg.sha512",
@@ -61,6 +64,7 @@
     "C:\\Users\\Esa\\.nuget\\packages\\system.numerics.tensors\\8.0.0\\system.numerics.tensors.8.0.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.1.0\\system.runtime.compilerservices.unsafe.6.1.0.nupkg.sha512",
+    "C:\\Users\\Esa\\.nuget\\packages\\system.speech\\8.0.0\\system.speech.8.0.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\xamarin.android.glide\\4.16.0.11\\xamarin.android.glide.4.16.0.11.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\xamarin.android.glide.annotations\\4.16.0.11\\xamarin.android.glide.annotations.4.16.0.11.nupkg.sha512",
@@ -160,5 +164,41 @@
     "C:\\Users\\Esa\\.nuget\\packages\\zxing.net\\0.16.9\\zxing.net.0.16.9.nupkg.sha512",
     "C:\\Users\\Esa\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "message": "ClientApp depends on CommunityToolkit.Maui (>= 8.1.0) but CommunityToolkit.Maui 8.1.0 was not found. CommunityToolkit.Maui 9.0.0 was resolved instead.",
+      "projectPath": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj",
+      "warningLevel": 1,
+      "filePath": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj",
+      "libraryId": "CommunityToolkit.Maui",
+      "targetGraphs": [
+        "net9.0-android35.0",
+        "net9.0-android35.0/android-arm64",
+        "net9.0-android35.0/android-x64",
+        "net9.0-android35.0/iossimulator-x64",
+        "net9.0-android35.0/maccatalyst-x64",
+        "net9.0-android35.0/win10-x64",
+        "net9.0-ios18.5",
+        "net9.0-ios18.5/android-arm64",
+        "net9.0-ios18.5/android-x64",
+        "net9.0-ios18.5/iossimulator-x64",
+        "net9.0-ios18.5/maccatalyst-x64",
+        "net9.0-ios18.5/win10-x64",
+        "net9.0-maccatalyst18.5",
+        "net9.0-maccatalyst18.5/android-arm64",
+        "net9.0-maccatalyst18.5/android-x64",
+        "net9.0-maccatalyst18.5/iossimulator-x64",
+        "net9.0-maccatalyst18.5/maccatalyst-x64",
+        "net9.0-maccatalyst18.5/win10-x64",
+        "net9.0-windows10.0.19041",
+        "net9.0-windows10.0.19041/android-arm64",
+        "net9.0-windows10.0.19041/android-x64",
+        "net9.0-windows10.0.19041/iossimulator-x64",
+        "net9.0-windows10.0.19041/maccatalyst-x64",
+        "net9.0-windows10.0.19041/win10-x64"
+      ]
+    }
+  ]
 }

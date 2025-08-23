@@ -43,17 +43,7 @@
                 Command="{Binding AnalyzeCommand}"
                 IsEnabled="{Binding IsAnalyzeEnabled}"
                 HorizontalOptions="Fill" />
-            <Label
-                Text="Detections:"
-                Style="{StaticResource SubHeadline}"
-                Margin="0,10,0,5"/>
-            <ListView ItemsSource="{Binding Results}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding}" TextColor="Black" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
