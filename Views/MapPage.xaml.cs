@@ -1,7 +1,6 @@
-using ClientApp.Core.Data;
+using ClientApp.Core.ViewModels;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
-
 
 namespace ClientApp.Views
 {
@@ -10,12 +9,12 @@ namespace ClientApp.Views
     /// </summary>
     public partial class MapPage : ContentPage
     {
-        private readonly ISightingRepository _sightingRepository;
+        private readonly MapPageViewModel _viewModel;
 
-        public MapPage(ISightingRepository sightingRepository)
+        public MapPage(MapPageViewModel viewModel)
         {
             InitializeComponent();
-            _sightingRepository = sightingRepository;
+            BindingContext = _viewModel = viewModel;
         }
 
         /// <summary>
@@ -24,25 +23,14 @@ namespace ClientApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await LoadSightingsAsync();
-        }
-
-        /// <summary>
-        /// Retrieve sightings and add pins to the map.
-        /// </summary>
-        private async Task LoadSightingsAsync()
-        {
+            await _viewModel.InitializeAsync();
             mapView.Pins.Clear();
-            
-            var sightings = await _sightingRepository.GetAllSightingsAsync();
             Location? firstLocation = null;
-
-            foreach (var sighting in sightings)
+            foreach (var sighting in _viewModel.Sightings)
             {
                 if (sighting.Location != null)
                 {
                     firstLocation ??= sighting.Location;
-
                     var pin = new Pin
                     {
                         Label = $"{sighting.ObservationType} ({sighting.Confidence:P0})",
@@ -64,4 +52,4 @@ namespace ClientApp.Views
             }
         }
     }
-} 
+}

@@ -14,6 +14,7 @@ using ClientApp.Core.Domain;
 using ClientApp.Core.Services;
 using ClientApp.Core.Data;
 using Microsoft.Maui.Devices.Sensors;
+using ClientApp.Core.ViewModels;
 
 namespace ClientApp.Views
 {
@@ -25,6 +26,8 @@ namespace ClientApp.Views
         private readonly IObjectDetector _objectDetector;
         private readonly ILocationService _locationService;
         private readonly ISightingRepository _sightingRepository;
+        private readonly CameraDetectionViewModel _viewModel;
+        private readonly INavigationService _navigationService;
         private bool _isProcessingFrame = false;
         private bool _isDetectorInitialized = false;
         private System.Threading.Timer? _frameProcessingTimer;
@@ -37,12 +40,14 @@ namespace ClientApp.Views
         /// <summary>
         /// Initialize page with required services.
         /// </summary>
-        public CameraDetectionPage(IObjectDetector objectDetector, ILocationService locationService, ISightingRepository sightingRepository)
+        public CameraDetectionPage(CameraDetectionViewModel viewModel, IObjectDetector objectDetector, ILocationService locationService, ISightingRepository sightingRepository, INavigationService navigationService)
         {
             InitializeComponent();
+            BindingContext = _viewModel = viewModel;
             _objectDetector = objectDetector;
             _locationService = locationService;
             _sightingRepository = sightingRepository;
+            _navigationService = navigationService;
         }
 
         /// <summary>
@@ -82,7 +87,7 @@ namespace ClientApp.Views
                 if (status != PermissionStatus.Granted)
                 {
                     await DisplayAlert("Permission Error", "Camera permission is required for live detection.", "OK");  
-                    await Shell.Current.GoToAsync(".."); 
+                    await _navigationService.GoToAsync("..");
                     return;
                 }
             }

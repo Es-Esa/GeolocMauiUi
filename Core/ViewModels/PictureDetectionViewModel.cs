@@ -3,10 +3,9 @@ using ClientApp.Core.Detection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+namespace ClientApp.Core.ViewModels;
 
-namespace ClientApp.ViewModels;
-
-public partial class PictureDetectionViewModel : ObservableObject
+public partial class PictureDetectionViewModel : BaseViewModel
 {
     private readonly IObjectDetector _objectDetector;
     private bool _isModelInitialized;
@@ -14,9 +13,6 @@ public partial class PictureDetectionViewModel : ObservableObject
 
     [ObservableProperty]
     private ImageSource? selectedImage;
-
-    [ObservableProperty]
-    private bool isBusy;
 
     [ObservableProperty]
     private bool isSelectImageEnabled;
@@ -29,6 +25,7 @@ public partial class PictureDetectionViewModel : ObservableObject
     public PictureDetectionViewModel(IObjectDetector objectDetector)
     {
         _objectDetector = objectDetector;
+        Title = "Image Detection";
     }
 
     public async Task InitializeAsync()
@@ -186,7 +183,7 @@ public partial class PictureDetectionViewModel : ObservableObject
         _selectedImageStream = null;
     }
 
-    partial void OnIsBusyChanged(bool value)
+    protected override void OnIsBusyChanged(bool value)
     {
         SelectImageCommand.NotifyCanExecuteChanged();
         AnalyzeCommand.NotifyCanExecuteChanged();

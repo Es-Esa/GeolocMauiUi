@@ -1,4 +1,4 @@
-using ClientApp.ViewModels;
+using ClientApp.Core.ViewModels;
 
 namespace ClientApp.Views;
 
