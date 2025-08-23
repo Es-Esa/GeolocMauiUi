@@ -58,10 +58,19 @@ namespace ClientApp.Views
         {
             base.OnAppearing();
             _viewModel.IsBusy = true;
+            _currentDetections.Clear();
+            canvasView.InvalidateSurface();
+
             await RequestCameraPermission();
             if (!_isDetectorInitialized)
             {
                 InitializeDetectorAsync();
+            }
+
+            if (cameraView.Camera == null && cameraView.Cameras.Count > 0)
+            {
+                cameraView.Camera = cameraView.Cameras.FirstOrDefault(c => c.Position == CameraPosition.Back);
+                cameraView.Camera ??= cameraView.Cameras.FirstOrDefault();
             }
 
             if (cameraView.Camera != null)
@@ -84,6 +93,9 @@ namespace ClientApp.Views
             base.OnDisappearing();
             _frameProcessingTimer?.Dispose();
             _isCameraStarted = false;
+            _currentDetections.Clear();
+            _isProcessingFrame = false;
+            MainThread.BeginInvokeOnMainThread(() => canvasView.InvalidateSurface());
 
             if (cameraView.Camera != null)
             {
