@@ -31,7 +31,17 @@ D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\mauifont.s
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\f\FluentUI.cs
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\f\OpenSans-Regular.ttf
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\f\OpenSans-Semibold.ttf
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\backgroud.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\reload.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\home.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\pin.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\sync.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\gallery.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\detect.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\detections.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\location.png
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\geoloc.png
+D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable\imagedetect.png
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable-xxxhdpi\dotnet_bot.png
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable-xxhdpi\dotnet_bot.png
 D:\Drone Geoloc\ClientApp\ClientApp\GeolocUI\obj\Debug\net9.0-android\resizetizer\r\drawable-xhdpi\dotnet_bot.png

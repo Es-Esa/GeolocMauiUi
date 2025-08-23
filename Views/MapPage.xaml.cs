@@ -1,10 +1,7 @@
 using ClientApp.Core.Data;
-using ClientApp.Core.Domain;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
-using Microsoft.Maui.Devices.Sensors;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace ClientApp.Views
 {

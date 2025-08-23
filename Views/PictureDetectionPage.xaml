@@ -12,6 +12,7 @@
                 Text="Select Image"
                 Command="{Binding SelectImageCommand}"
                 IsEnabled="{Binding IsSelectImageEnabled}"
+                ImageSource="gallery.png"
                 HorizontalOptions="Fill" />
             <Image
                 HeightRequest="250"
@@ -26,6 +27,7 @@
                 VerticalOptions="Center" />
             <Button
                 Text="Analyze Image"
+                ImageSource="detect.png"
                 Command="{Binding AnalyzeCommand}"
                 IsEnabled="{Binding IsAnalyzeEnabled}"
                 HorizontalOptions="Fill" />
