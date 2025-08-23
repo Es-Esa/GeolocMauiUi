@@ -1,12 +1,16 @@
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.IO;
 using ClientApp.Core.Detection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Linq;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Graphics.Platform;
 
+namespace ClientApp.Core.ViewModels;
 
-namespace ClientApp.ViewModels;
-
-public partial class PictureDetectionViewModel : ObservableObject
+public partial class PictureDetectionViewModel : BaseViewModel
 {
     private readonly IObjectDetector _objectDetector;
     private bool _isModelInitialized;
@@ -16,9 +20,6 @@ public partial class PictureDetectionViewModel : ObservableObject
     private ImageSource? selectedImage;
 
     [ObservableProperty]
-    private bool isBusy;
-
-    [ObservableProperty]
     private bool isSelectImageEnabled;
 
     [ObservableProperty]
@@ -26,9 +27,16 @@ public partial class PictureDetectionViewModel : ObservableObject
 
     public ObservableCollection<string> Results { get; } = new();
 
+    [ObservableProperty]
+    private List<YoloBoundingBox> detections = new();
+
+    [ObservableProperty]
+    private Size imageSize;
+
     public PictureDetectionViewModel(IObjectDetector objectDetector)
     {
         _objectDetector = objectDetector;
+        Title = "Image Detection";
     }
 
     public async Task InitializeAsync()
@@ -74,21 +82,18 @@ public partial class PictureDetectionViewModel : ObservableObject
             {
                 Results.Clear();
                 _selectedImageStream?.Dispose();
-                _selectedImageStream = await photo.OpenReadAsync();
-                var memoryStream = new MemoryStream();
-                await _selectedImageStream.CopyToAsync(memoryStream);
-                _selectedImageStream.Dispose();
-                memoryStream.Position = 0;
-                _selectedImageStream = memoryStream;
-                SelectedImage = ImageSource.FromStream(() =>
+                var photoStream = await photo.OpenReadAsync();
+                using var ms = new MemoryStream();
+                await photoStream.CopyToAsync(ms);
+                photoStream.Dispose();
+                var imageBytes = ms.ToArray();
+                _selectedImageStream = new MemoryStream(imageBytes);
+                using (var img = PlatformImage.FromStream(new MemoryStream(imageBytes)))
                 {
-                    var newStream = new MemoryStream();
-                    _selectedImageStream.Position = 0;
-                    _selectedImageStream.CopyTo(newStream);
-                    _selectedImageStream.Position = 0;
-                    newStream.Position = 0;
-                    return newStream;
-                });
+                    ImageSize = new Size(img.Width, img.Height);
+                }
+                SelectedImage = ImageSource.FromStream(() => new MemoryStream(imageBytes));
+                Detections = new List<YoloBoundingBox>();
                 IsAnalyzeEnabled = _isModelInitialized;
             }
             else
@@ -137,9 +142,10 @@ public partial class PictureDetectionViewModel : ObservableObject
         {
             _selectedImageStream.Position = 0;
             var detections = await _objectDetector.DetectAsync(_selectedImageStream);
-            if (detections != null && detections.Any())
+            Detections = detections?.ToList() ?? new List<YoloBoundingBox>();
+            if (Detections.Any())
             {
-                foreach (var detection in detections)
+                foreach (var detection in Detections)
                 {
                     string resultString = $"{detection.Label}: {detection.Score:P1} [X:{detection.TopLeftX},Y:{detection.TopLeftY},W:{detection.BottomRightX - detection.TopLeftX},H:{detection.BottomRightY - detection.TopLeftY}]";
                     Results.Add(resultString);
@@ -176,6 +182,8 @@ public partial class PictureDetectionViewModel : ObservableObject
         _selectedImageStream?.Dispose();
         _selectedImageStream = null;
         SelectedImage = null;
+        Detections = new List<YoloBoundingBox>();
+        ImageSize = Size.Zero;
         IsAnalyzeEnabled = false;
         AnalyzeCommand.NotifyCanExecuteChanged();
     }
@@ -184,9 +192,10 @@ public partial class PictureDetectionViewModel : ObservableObject
     {
         _selectedImageStream?.Dispose();
         _selectedImageStream = null;
+        Detections = new List<YoloBoundingBox>();
     }
 
-    partial void OnIsBusyChanged(bool value)
+    protected override void OnIsBusyChanged(bool value)
     {
         SelectImageCommand.NotifyCanExecuteChanged();
         AnalyzeCommand.NotifyCanExecuteChanged();

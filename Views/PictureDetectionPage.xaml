@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ClientApp.Views.PictureDetectionPage">
+             xmlns:viewmodels="clr-namespace:ClientApp.Core.ViewModels"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             x:DataType="viewmodels:PictureDetectionViewModel"
+             x:Class="ClientApp.Views.PictureDetectionPage"
+             Title="{Binding Title}">
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="15">
             <Label
@@ -14,12 +18,20 @@
                 IsEnabled="{Binding IsSelectImageEnabled}"
                 ImageSource="gallery.png"
                 HorizontalOptions="Fill" />
-            <Image
-                HeightRequest="250"
-                Aspect="AspectFit"
-                BackgroundColor="LightGray"
-                Margin="0,10,0,10"
-                Source="{Binding SelectedImage}" />
+            <Grid HeightRequest="250" Margin="0,10,0,10">
+                <Image
+                    x:Name="imageView"
+                    Aspect="AspectFit"
+                    BackgroundColor="LightGray"
+                    Source="{Binding SelectedImage}" />
+                <skia:SKCanvasView
+                    x:Name="canvasView"
+                    PaintSurface="OnCanvasViewPaintSurface"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    IgnorePixelScaling="True"
+                    InputTransparent="True" />
+            </Grid>
             <ActivityIndicator
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"
@@ -38,7 +50,7 @@
             <ListView ItemsSource="{Binding Results}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding}" />
+                        <TextCell Text="{Binding}" TextColor="Black" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

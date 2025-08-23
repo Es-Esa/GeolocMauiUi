@@ -14,6 +14,7 @@ using ClientApp.Core.Domain;
 using ClientApp.Core.Services;
 using ClientApp.Core.Data;
 using Microsoft.Maui.Devices.Sensors;
+using ClientApp.Core.ViewModels;
 
 namespace ClientApp.Views
 {
@@ -25,8 +26,11 @@ namespace ClientApp.Views
         private readonly IObjectDetector _objectDetector;
         private readonly ILocationService _locationService;
         private readonly ISightingRepository _sightingRepository;
+        private readonly CameraDetectionViewModel _viewModel;
+        private readonly INavigationService _navigationService;
         private bool _isProcessingFrame = false;
         private bool _isDetectorInitialized = false;
+        private bool _isCameraStarted = false;
         private System.Threading.Timer? _frameProcessingTimer;
         private const int FrameProcessingIntervalMs = 100;
         private List<YoloBoundingBox> _currentDetections = new List<YoloBoundingBox>();
@@ -37,12 +41,14 @@ namespace ClientApp.Views
         /// <summary>
         /// Initialize page with required services.
         /// </summary>
-        public CameraDetectionPage(IObjectDetector objectDetector, ILocationService locationService, ISightingRepository sightingRepository)
+        public CameraDetectionPage(CameraDetectionViewModel viewModel, IObjectDetector objectDetector, ILocationService locationService, ISightingRepository sightingRepository, INavigationService navigationService)
         {
             InitializeComponent();
+            BindingContext = _viewModel = viewModel;
             _objectDetector = objectDetector;
             _locationService = locationService;
             _sightingRepository = sightingRepository;
+            _navigationService = navigationService;
         }
 
         /// <summary>
@@ -51,9 +57,32 @@ namespace ClientApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            _viewModel.IsBusy = true;
+            _currentDetections.Clear();
+            canvasView.InvalidateSurface();
+
             await RequestCameraPermission();
-            InitializeDetectorAsync(); 
-            
+            if (!_isDetectorInitialized)
+            {
+                InitializeDetectorAsync();
+            }
+
+            if (cameraView.Camera == null && cameraView.Cameras.Count > 0)
+            {
+                cameraView.Camera = cameraView.Cameras.FirstOrDefault(c => c.Position == CameraPosition.Back);
+                cameraView.Camera ??= cameraView.Cameras.FirstOrDefault();
+            }
+
+            if (cameraView.Camera != null)
+            {
+                var result = await cameraView.StartCameraAsync();
+                if (result == CameraResult.Success)
+                {
+                    _isCameraStarted = true;
+                    statusLabel.Text = "Camera Started. Detecting...";
+                    StartFrameProcessingLoop();
+                }
+            }
         }
 
         /// <summary>
@@ -63,10 +92,14 @@ namespace ClientApp.Views
         {
             base.OnDisappearing();
             _frameProcessingTimer?.Dispose();
-        
-            if (cameraView.Camera != null) 
+            _isCameraStarted = false;
+            _currentDetections.Clear();
+            _isProcessingFrame = false;
+            MainThread.BeginInvokeOnMainThread(() => canvasView.InvalidateSurface());
+
+            if (cameraView.Camera != null)
             {
-                 await cameraView.StopCameraAsync(); 
+                await cameraView.StopCameraAsync();
             }
         }
 
@@ -82,7 +115,7 @@ namespace ClientApp.Views
                 if (status != PermissionStatus.Granted)
                 {
                     await DisplayAlert("Permission Error", "Camera permission is required for live detection.", "OK");  
-                    await Shell.Current.GoToAsync(".."); 
+                    await _navigationService.GoToAsync("..");
                     return;
                 }
             }
@@ -99,7 +132,7 @@ namespace ClientApp.Views
                 await _objectDetector.InitializeAsync();
                 _isDetectorInitialized = true;
                 statusLabel.Text = "Detector Initialized. Waiting for Camera...";
-                 StartFrameProcessingLoop(); 
+                StartFrameProcessingLoop();
             }
             catch (Exception ex)
             {
@@ -125,7 +158,8 @@ namespace ClientApp.Views
                     await cameraView.StopCameraAsync();
                     var result = await cameraView.StartCameraAsync();
                     if (result == CameraResult.Success)
-                    { 
+                    {
+                        _isCameraStarted = true;
                         statusLabel.Text = "Camera Started. Detecting...";
                         StartFrameProcessingLoop();
                     }
@@ -152,14 +186,15 @@ namespace ClientApp.Views
         /// </summary>
         private void StartFrameProcessingLoop()
         {
-           
-            if (!_isDetectorInitialized || cameraView.Camera == null)
-            { 
-                return; 
+            if (!_isDetectorInitialized || !_isCameraStarted)
+            {
+                return;
             }
 
-             _frameProcessingTimer?.Dispose();
-             _frameProcessingTimer = new System.Threading.Timer(ProcessFrame, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(FrameProcessingIntervalMs));
+            _frameProcessingTimer?.Dispose();
+            _frameProcessingTimer = new System.Threading.Timer(ProcessFrame, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(FrameProcessingIntervalMs));
+            _viewModel.IsBusy = false;
+            statusLabel.Text = "Detecting...";
         }
 
         /// <summary>
