@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ClientApp.Views
 {
     /// <summary>
-    /// MapPage luokka on karttasivun määrittely joka sisältää kartan ja sen pinniä.
+    /// Page that displays all sightings on a map.
     /// </summary>
     public partial class MapPage : ContentPage
     {
@@ -22,7 +22,7 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// Tämä metodi lataa kaikki havainnot ja lisää ne karttaan.
+        /// Load sightings when the page appears.
         /// </summary>
         protected override async void OnAppearing()
         {
@@ -31,9 +31,8 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// Tämä metodi lataa kaikki havainnot ja lisää ne karttaan.
+        /// Retrieve sightings and add pins to the map.
         /// </summary>
-        /// <returns></returns>
         private async Task LoadSightingsAsync()
         {
             mapView.Pins.Clear();

@@ -4,10 +4,10 @@ namespace ClientApp.Core.Utils
     public static class GeometryUtils
     {
         /// <summary>
-        /// Calculate either the initial or the final bearing (sometimes 
-        /// referred to as forward azimuth) which ,if followed in a straight 
-        /// line along a great-circle arc, will take you from the start point 
-        /// to the end point. Final endpoint needs to be reversed.
+        /// Calculate either the initial or final bearing (sometimes
+        /// referred to as forward azimuth) which, if followed in a straight
+        /// line along a great-circle arc, will take you from the start point
+        /// to the end point. The final endpoint needs to be reversed.
         /// 
         /// Original source:
         /// https://www.movable-type.co.uk/scripts/latlong.html

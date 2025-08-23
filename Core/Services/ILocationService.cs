@@ -5,14 +5,13 @@ namespace ClientApp.Core.Services
 {
 
     /// <summary>
-    /// ILocationService rajapinta m��rittelee metodit sijainnin hakemiseen.
+    /// Provides access to the device's current location.
     /// </summary>
     public interface ILocationService
     {
         /// <summary>
-        /// /// GetCurrentLocationAsync metodi hakee laitteen nykyisen sijainnin.
+        /// Get the device's current location.
         /// </summary>
-        /// <returns></returns>
         Task<Location?> GetCurrentLocationAsync();
     }
-} 
+}

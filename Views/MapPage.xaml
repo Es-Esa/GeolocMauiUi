@@ -8,6 +8,5 @@
 
     <Grid>
         <maps:Map x:Name="mapView" />
-        <!-- Optional: Add button to refresh pins -->
     </Grid>
-</ContentPage> 
+</ContentPage>

@@ -18,7 +18,7 @@ using Microsoft.Maui.Devices.Sensors;
 namespace ClientApp.Views
 {
     /// <summary>
-    /// CameraDetectionPage luokka on kameran määrittely joka sisältää mallin alustuksen ja analysoinnin.
+    /// Displays a live camera feed and runs object detection.
     /// </summary>
     public partial class CameraDetectionPage : ContentPage
     {
@@ -35,11 +35,8 @@ namespace ClientApp.Views
 
 
         /// <summary>
-        /// CameraDetectionPage constructor. Tämän luokka on kameran määrittely.
+        /// Initialize page with required services.
         /// </summary>
-        /// <param name="objectDetector"></param>
-        /// <param name="locationService"></param>
-        /// <param name="sightingRepository"></param>
         public CameraDetectionPage(IObjectDetector objectDetector, ILocationService locationService, ISightingRepository sightingRepository)
         {
             InitializeComponent();
@@ -49,7 +46,7 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// T�m� metodi alustaa mallin ja tarkistaa onko se valmis analysoimaan kuvia.
+        /// Request permissions and start detector when the page appears.
         /// </summary>
         protected override async void OnAppearing()
         {
@@ -60,7 +57,7 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// Tämä metodi lopettaa kameran ja mallin käytön kun sivu suljetaan.
+        /// Stop camera and processing when the page closes.
         /// </summary>
         protected override async void OnDisappearing()
         {
@@ -74,9 +71,8 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// RequestCameraPermission metodi tarkistaa onko kameran käyttöoikeus myönnetty.
+        /// Ensure camera permission is granted.
         /// </summary>
-        /// <returns></returns>
         private async Task RequestCameraPermission()
         {
             var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
@@ -93,7 +89,7 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// InitializeDetectorAsync metodi alustaa mallin ja tarkistaa onko se valmis analysoimaan kuvia.
+        /// Initialize the object detector.
         /// </summary>
         private async void InitializeDetectorAsync()
         {
@@ -115,10 +111,8 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// CamerasLoaded metodi tarkistaa onko kamera ladattu ja aloittaa kameran käytön.
+        /// Start the selected camera once it is loaded.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void CameraView_CamerasLoaded(object? sender, EventArgs e)
         {
             if (cameraView.Cameras.Count > 0)
@@ -154,7 +148,7 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// StartFrameProcessingLoop metodi aloittaa kehyksen käsittelyn silmukan.
+        /// Begin periodic frame processing.
         /// </summary>
         private void StartFrameProcessingLoop()
         {
@@ -169,9 +163,8 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// ProcessFrame metodi käsittelee kehyksen ja suorittaa mallin analyysin.
+        /// Capture a frame, run detection, and log sightings.
         /// </summary>
-        /// <param name="state"></param>
         private async void ProcessFrame(object? state)
         {
             if (!_isProcessingFrame && _isDetectorInitialized && cameraView.Camera != null)
@@ -276,10 +269,8 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// onCanvasViewPaintSurface metodi piirtää havaitut laatikot ja tekstit kankaalle.
+        /// Draw detection boxes and labels on the canvas.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
         void OnCanvasViewPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
            

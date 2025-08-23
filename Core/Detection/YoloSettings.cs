@@ -1,6 +1,3 @@
-// Removed Windows-specific using statement
-// using Windows.ApplicationModel.Background;
-
 namespace ClientApp.Core.Detection
 {
 	public struct YoloSettings
@@ -8,12 +5,12 @@ namespace ClientApp.Core.Detection
 		public const string ModelFileName = "yolo11n-nms.onnx";
 		public const string ModelClassesFileName = "coco-classes.txt";
 
-		public struct LayerNames
-		{
-			// From Netron
-			public const string Input = "images";
-			public const string NMSOutput = "output0";
-		};
+                public struct LayerNames
+                {
+                        // Layer names from Netron
+                        public const string Input = "images";
+                        public const string NMSOutput = "output0";
+                };
 
 		public struct Input
 		{

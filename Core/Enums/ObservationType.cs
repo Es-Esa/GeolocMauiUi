@@ -6,8 +6,8 @@
         Human,
         Car,
         Motorbike,
-		Truck,
-		Bicycle,
-		Other,
-	}
+        Truck,
+        Bicycle,
+        Other
+    }
 }
