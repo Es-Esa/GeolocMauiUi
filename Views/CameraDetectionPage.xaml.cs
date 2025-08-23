@@ -30,6 +30,7 @@ namespace ClientApp.Views
         private readonly INavigationService _navigationService;
         private bool _isProcessingFrame = false;
         private bool _isDetectorInitialized = false;
+        private bool _isCameraStarted = false;
         private System.Threading.Timer? _frameProcessingTimer;
         private const int FrameProcessingIntervalMs = 100;
         private List<YoloBoundingBox> _currentDetections = new List<YoloBoundingBox>();
@@ -56,6 +57,7 @@ namespace ClientApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            _viewModel.IsBusy = true;
             await RequestCameraPermission();
             if (!_isDetectorInitialized)
             {
@@ -67,6 +69,7 @@ namespace ClientApp.Views
                 var result = await cameraView.StartCameraAsync();
                 if (result == CameraResult.Success)
                 {
+                    _isCameraStarted = true;
                     statusLabel.Text = "Camera Started. Detecting...";
                     StartFrameProcessingLoop();
                 }
@@ -80,10 +83,11 @@ namespace ClientApp.Views
         {
             base.OnDisappearing();
             _frameProcessingTimer?.Dispose();
-        
-            if (cameraView.Camera != null) 
+            _isCameraStarted = false;
+
+            if (cameraView.Camera != null)
             {
-                 await cameraView.StopCameraAsync(); 
+                await cameraView.StopCameraAsync();
             }
         }
 
@@ -116,6 +120,7 @@ namespace ClientApp.Views
                 await _objectDetector.InitializeAsync();
                 _isDetectorInitialized = true;
                 statusLabel.Text = "Detector Initialized. Waiting for Camera...";
+                StartFrameProcessingLoop();
             }
             catch (Exception ex)
             {
@@ -141,7 +146,8 @@ namespace ClientApp.Views
                     await cameraView.StopCameraAsync();
                     var result = await cameraView.StartCameraAsync();
                     if (result == CameraResult.Success)
-                    { 
+                    {
+                        _isCameraStarted = true;
                         statusLabel.Text = "Camera Started. Detecting...";
                         StartFrameProcessingLoop();
                     }
@@ -168,14 +174,15 @@ namespace ClientApp.Views
         /// </summary>
         private void StartFrameProcessingLoop()
         {
-           
-            if (!_isDetectorInitialized || cameraView.Camera == null)
-            { 
-                return; 
+            if (!_isDetectorInitialized || !_isCameraStarted)
+            {
+                return;
             }
 
-             _frameProcessingTimer?.Dispose();
-             _frameProcessingTimer = new System.Threading.Timer(ProcessFrame, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(FrameProcessingIntervalMs));
+            _frameProcessingTimer?.Dispose();
+            _frameProcessingTimer = new System.Threading.Timer(ProcessFrame, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(FrameProcessingIntervalMs));
+            _viewModel.IsBusy = false;
+            statusLabel.Text = "Detecting...";
         }
 
         /// <summary>

@@ -26,6 +26,12 @@
             IgnorePixelScaling="True"
             InputTransparent="True" />
 
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
+
         <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
             <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10" />
         </VerticalStackLayout>
