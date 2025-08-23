@@ -92,14 +92,17 @@ namespace ClientApp.Views
         {
             base.OnDisappearing();
             _frameProcessingTimer?.Dispose();
+            _frameProcessingTimer = null;
             _isCameraStarted = false;
-            _currentDetections.Clear();
             _isProcessingFrame = false;
+            _isDetectorInitialized = false;
+            _currentDetections.Clear();
             MainThread.BeginInvokeOnMainThread(() => canvasView.InvalidateSurface());
 
             if (cameraView.Camera != null)
             {
                 await cameraView.StopCameraAsync();
+                cameraView.Camera = null;
             }
         }
 
