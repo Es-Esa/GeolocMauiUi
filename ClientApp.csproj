@@ -79,8 +79,6 @@
 		<PackageReference Include="Microsoft.Spatial" Version="8.2.3" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\ClientApp.Core\ClientApp.Core.csproj" />
-	</ItemGroup>
+
 
 </Project>
