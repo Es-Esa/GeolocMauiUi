@@ -10,6 +10,8 @@
                 SemanticProperties.HeadingLevel="Level1" />
             <Button
                 Text="Select Image"
+                ImageSource="gallery.png"
+                ContentLayout="Left,10"
                 Command="{Binding SelectImageCommand}"
                 IsEnabled="{Binding IsSelectImageEnabled}"
                 HorizontalOptions="Fill" />
@@ -26,6 +28,8 @@
                 VerticalOptions="Center" />
             <Button
                 Text="Analyze Image"
+                ImageSource="detect.png"
+                ContentLayout="Left,10"
                 Command="{Binding AnalyzeCommand}"
                 IsEnabled="{Binding IsAnalyzeEnabled}"
                 HorizontalOptions="Fill" />

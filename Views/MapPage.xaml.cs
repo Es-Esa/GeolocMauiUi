@@ -3,6 +3,7 @@ using ClientApp.Core.Domain;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Microsoft.Maui.Devices.Sensors;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -66,5 +67,13 @@ namespace ClientApp.Views
                 mapView.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(60.1699, 24.9384), Distance.FromKilometers(5)));
             }
         }
+
+        /// <summary>
+        /// Refresh the map when the sync button is pressed.
+        /// </summary>
+        private async void OnSyncClicked(object sender, EventArgs e)
+        {
+            await LoadSightingsAsync();
+        }
     }
-} 
+}

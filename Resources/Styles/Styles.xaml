@@ -16,7 +16,11 @@
     <!-- General Page Background -->
     <Style TargetType="ContentPage" ApplyToDerivedTypes="True">
         <Setter Property="Padding" Value="0"/>
-        <Setter Property="BackgroundColor" Value="{StaticResource AppBackgroundColor}" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="backgroud.png" Stretch="UniformToFill" />
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- Shell Styling -->

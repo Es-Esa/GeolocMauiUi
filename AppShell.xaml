@@ -22,13 +22,13 @@
         <ShellContent
             Title="Map"
             Route="Map"
-            Icon="map.png"
+            Icon="pin.png"
             ContentTemplate="{DataTemplate views:MapPage}" />
 
         <ShellContent
             Title="Image detection"
             Route="Img"
-            Icon="camera.png"
+            Icon="gallery.png"
             ContentTemplate="{DataTemplate views:PictureDetectionPage}" />
     </TabBar>
 </Shell>

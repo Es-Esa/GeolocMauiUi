@@ -8,5 +8,16 @@
 
     <Grid>
         <maps:Map x:Name="mapView" />
+
+        <Button
+            x:Name="syncButton"
+            ImageSource="sync.png"
+            WidthRequest="56"
+            HeightRequest="56"
+            CornerRadius="28"
+            HorizontalOptions="Start"
+            VerticalOptions="End"
+            Margin="20"
+            Clicked="OnSyncClicked" />
     </Grid>
 </ContentPage>
