@@ -5,7 +5,7 @@ using ClientApp.Core.Enums;
 namespace ClientApp.Core.Domain
 {
     /// <summary>
-    /// Sighting luokka m��rittelee havainnon ominaisuudet.
+    /// Represents a single detection sighting.
     /// </summary>
     public class Sighting
     {

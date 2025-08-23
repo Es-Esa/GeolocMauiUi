@@ -8,29 +8,24 @@
              Title="Live Detection">
 
     <Grid>
-        <!-- Camera View to display the feed -->
-        <cv:CameraView 
+        <cv:CameraView
             x:Name="cameraView"
             CamerasLoaded="CameraView_CamerasLoaded"
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand" 
-            AutoStartPreview="False" 
-            AutoSnapShotAsImageSource="False" 
-            />
-        
-        <!-- Replace GraphicsView with SKCanvasView -->
-        <skia:SKCanvasView 
-            x:Name="canvasView" 
-            PaintSurface="OnCanvasViewPaintSurface" 
+            VerticalOptions="FillAndExpand"
+            AutoStartPreview="False"
+            AutoSnapShotAsImageSource="False" />
+
+        <skia:SKCanvasView
+            x:Name="canvasView"
+            PaintSurface="OnCanvasViewPaintSurface"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             IgnorePixelScaling="True"
-            InputTransparent="True" /> 
-            
-        <!-- Optional: Add buttons or labels if needed -->
-        <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
-             <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10"/>
-        </VerticalStackLayout>
+            InputTransparent="True" />
 
+        <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
+            <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10" />
+        </VerticalStackLayout>
     </Grid>
-</ContentPage> 
+</ContentPage>

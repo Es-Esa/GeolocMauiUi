@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 namespace ClientApp.Core.Data
 {
     /// <summary>
-    /// IsightingRepository rajapinta määrittelee metodit havainnointien lisäämiseen ja hakemiseen.
+    /// Defines methods for storing and retrieving sightings.
     /// </summary>
     public interface ISightingRepository
     {
 
         /// <summary>
-        /// Tämä metodi lisää havainnon muistiin.
+        /// Add a sighting to the repository.
         /// </summary>
-        /// <param name="sighting"></param>
-        /// <returns></returns>
         Task AddSightingAsync(Sighting sighting);
+
+        /// <summary>
+        /// Retrieve all stored sightings.
+        /// </summary>
         Task<List<Sighting>> GetAllSightingsAsync();
     }
-} 
+}

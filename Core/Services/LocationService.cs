@@ -7,7 +7,7 @@ namespace ClientApp.Core.Services
 {
 
     /// <summary>
-    /// ILocationService rajapinta määrittelee metodit sijainnin hakemiseen.
+    /// Service that retrieves the device's location.
     /// </summary>
     public class LocationService : ILocationService
     {
@@ -15,9 +15,8 @@ namespace ClientApp.Core.Services
         private CancellationTokenSource? _cancelTokenSource;
 
         /// <summary>
-        /// GetCurrentLocationAsync metodi hakee laitteen nykyisen sijainnin.
+        /// Retrieve the current location of the device.
         /// </summary>
-        /// <returns></returns>
         public async Task<Location?> GetCurrentLocationAsync()
         {
             if (_isCheckingLocation) return null; 
@@ -27,7 +26,6 @@ namespace ClientApp.Core.Services
                 _isCheckingLocation = true;
 
 
-                // tarkistaa onko laitteessa GPS käytössä
                 var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
                 if (status != PermissionStatus.Granted)
                 {
@@ -40,7 +38,6 @@ namespace ClientApp.Core.Services
                     }
                 }
 
-                // annetaan sijainti tarkkuus ja aikaraja
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
                 _cancelTokenSource = new CancellationTokenSource();
                 Location? location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);

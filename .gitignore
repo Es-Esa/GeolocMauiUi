@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/MUISTA.txt
+*.apk
+bin/Debug/net9.0-android/ClientApp.dll
+bin/Debug/net9.0-android/ClientApp.pdb
+bin/Debug/net9.0-android/ClientApp.xml
+bin/Debug/net9.0-android/ClientApp.runtimeconfig.json
+bin/Debug/net9.0-android/com.geoloc.clientapp-Signed.apk.idsig
+bin/Debug/net9.0-android/Microsoft.Maui.Controls.HotReload.Forms.dll
+bin/Debug/net9.0-android/Microsoft.VisualStudio.DesignTools.TapContract.dll
+bin/Debug/net9.0-android/Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
+bin/Debug/net9.0-android/Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll

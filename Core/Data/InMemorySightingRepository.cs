@@ -9,22 +9,18 @@ namespace ClientApp.Core.Data
 {
 
     /// <summary>
-    /// InMemorySightingRepository on muistissa toimiva havainnointien tallennusluokka.
-    /// Se tallentaa havainnot muistiin ja tarjoaa metodeja niiden lisäämiseen ja hakemiseen.
-    /// Tämä on väliaikainen toteutus, sillä myöhemmin teemme rajapinnan jolla lähetämme tiedot palvelimelle.
+    /// Stores sightings in memory. Temporary implementation before adding a backend.
     /// </summary>
     public class InMemorySightingRepository : ISightingRepository
     {
         /// <summary>
-        /// Tämä lista tallentaa havainnot muistiin.
+        /// In-memory list of sightings.
         /// </summary>
-        private readonly List<Sighting> _sightings = new List<Sighting>();
+        private readonly List<Sighting> _sightings = new();
 
         /// <summary>
-        /// Tämä metodi lisää havainnon muistiin.
+        /// Add a sighting to the repository.
         /// </summary>
-        /// <param name="sighting"></param>
-        /// <returns></returns>
         public Task AddSightingAsync(Sighting sighting)
         {
             _sightings.Add(sighting);
@@ -34,9 +30,8 @@ namespace ClientApp.Core.Data
         }
 
         /// <summary>
-        /// Tämä metodi hakee kaikki havainnot muistista.
+        /// Retrieve all sightings.
         /// </summary>
-        /// <returns></returns>
         public Task<List<Sighting>> GetAllSightingsAsync()
         {
             // Return a copy to prevent external modification

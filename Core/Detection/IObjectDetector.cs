@@ -5,21 +5,18 @@ using System.Threading.Tasks;
 namespace ClientApp.Core.Detection
 {
     /// <summary>
-    /// /// IObjectDetector rajapinta määrittelee metodit objektien tunnistamiseen ja mallin alustamiseen.
+    /// Defines methods for object detection and model initialization.
     /// </summary>
     public interface IObjectDetector
     {
         /// <summary>
-        /// /// InitializeAsync metodi alustaa mallin ja tarkistaa onko se valmis analysoimaan kuvia.
+        /// Initialize the detection model.
         /// </summary>
-        /// <returns></returns>
         Task InitializeAsync();
 
         /// <summary>
-        /// /// DetectAsync metodi analysoi kuvan ja palauttaa listan tunnistetuista objekteista.
+        /// Analyze an image and return detected objects.
         /// </summary>
-        /// <param name="imageStream"></param>
-        /// <returns></returns>
         Task<List<YoloBoundingBox>> DetectAsync(Stream imageStream);
     }
-} 
+}
