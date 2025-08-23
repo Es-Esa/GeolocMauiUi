@@ -358,7 +358,8 @@
     <Style TargetType="Shadow">
         <Setter Property="Radius" Value="15"/>
         <Setter Property="Opacity" Value="0.5"/>
-        <Setter Property="Brush" Value="{StaticResource WhiteBrush}" />
+        <!-- Use Color property instead of Brush to avoid requiring ImageBrush type -->
+        <Setter Property="Color" Value="{StaticResource White}" />
         <Setter Property="Offset" Value="10,10"/>
     </Style>
 
