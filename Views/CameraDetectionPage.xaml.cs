@@ -57,8 +57,20 @@ namespace ClientApp.Views
         {
             base.OnAppearing();
             await RequestCameraPermission();
-            InitializeDetectorAsync(); 
-            
+            if (!_isDetectorInitialized)
+            {
+                InitializeDetectorAsync();
+            }
+
+            if (cameraView.Camera != null)
+            {
+                var result = await cameraView.StartCameraAsync();
+                if (result == CameraResult.Success)
+                {
+                    statusLabel.Text = "Camera Started. Detecting...";
+                    StartFrameProcessingLoop();
+                }
+            }
         }
 
         /// <summary>
@@ -104,7 +116,6 @@ namespace ClientApp.Views
                 await _objectDetector.InitializeAsync();
                 _isDetectorInitialized = true;
                 statusLabel.Text = "Detector Initialized. Waiting for Camera...";
-                 StartFrameProcessingLoop(); 
             }
             catch (Exception ex)
             {
