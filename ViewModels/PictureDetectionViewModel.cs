@@ -1,11 +1,8 @@
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using ClientApp.Core.Detection;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Media;
+
 
 namespace ClientApp.ViewModels;
 

@@ -358,7 +358,7 @@
     <Style TargetType="Shadow">
         <Setter Property="Radius" Value="15"/>
         <Setter Property="Opacity" Value="0.5"/>
-        <Setter Property="Brush" Value="{StaticResource WhiteBrush}" />
+        <!-- Remove invalid Color property setter to fix XC0001 and XLS0431 -->
         <Setter Property="Offset" Value="10,10"/>
     </Style>
 
