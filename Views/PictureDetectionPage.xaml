@@ -17,32 +17,37 @@
                 Command="{Binding SelectImageCommand}"
                 IsEnabled="{Binding IsSelectImageEnabled}"
                 ImageSource="gallery.png"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                SemanticProperties.Description="Select an image from the gallery" />
             <Grid HeightRequest="250" Margin="0,10,0,10">
                 <Image
                     x:Name="imageView"
                     Aspect="AspectFit"
                     BackgroundColor="LightGray"
-                    Source="{Binding SelectedImage}" />
+                    Source="{Binding SelectedImage}"
+                    SemanticProperties.Description="Selected image preview" />
                 <skia:SKCanvasView
                     x:Name="canvasView"
                     PaintSurface="OnCanvasViewPaintSurface"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"
                     IgnorePixelScaling="True"
-                    InputTransparent="True" />
+                    InputTransparent="True"
+                    AutomationProperties.IsInAccessibleTree="False" />
             </Grid>
             <ActivityIndicator
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"
                 HorizontalOptions="Center"
-                VerticalOptions="Center" />
+                VerticalOptions="Center"
+                SemanticProperties.Description="Processing" />
             <Button
                 Text="Analyze Image"
                 ImageSource="detect.png"
                 Command="{Binding AnalyzeCommand}"
                 IsEnabled="{Binding IsAnalyzeEnabled}"
-                HorizontalOptions="Fill" />
+                HorizontalOptions="Fill"
+                SemanticProperties.Description="Analyze the selected image" />
             
         </VerticalStackLayout>
     </ScrollView>
