@@ -16,7 +16,8 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             AutoStartPreview="False"
-            AutoSnapShotAsImageSource="False" />
+            AutoSnapShotAsImageSource="False"
+            SemanticProperties.Description="Live camera view for object detection" />
 
         <skia:SKCanvasView
             x:Name="canvasView"
@@ -24,16 +25,25 @@
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
             IgnorePixelScaling="True"
-            InputTransparent="True" />
+            InputTransparent="True"
+            AutomationProperties.IsInAccessibleTree="False" />
 
         <ActivityIndicator
             HorizontalOptions="Center"
             VerticalOptions="Center"
             IsRunning="{Binding IsBusy}"
-            IsVisible="{Binding IsBusy}" />
+            IsVisible="{Binding IsBusy}"
+            SemanticProperties.Description="Processing" />
 
-        <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
-            <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10" />
+        <VerticalStackLayout VerticalOptions="End"
+                             HorizontalOptions="Center"
+                             Padding="20">
+            <Label x:Name="statusLabel"
+                   Text="Initializing..."
+                   TextColor="White"
+                   BackgroundColor="#80000000"
+                   Padding="10"
+                   AutomationProperties.LiveSetting="Polite" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

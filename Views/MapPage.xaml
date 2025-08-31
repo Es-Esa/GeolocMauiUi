@@ -9,6 +9,7 @@
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
 
     <Grid>
-        <maps:Map x:Name="mapView" />
+        <maps:Map x:Name="mapView"
+                  SemanticProperties.Description="Map showing locations of detected objects" />
     </Grid>
 </ContentPage>

@@ -7,10 +7,15 @@
              Title="{Binding Title}">
     <ScrollView>
         <VerticalStackLayout Padding="30,0" Spacing="20" HorizontalOptions="Center">
-            <Image Source="geoloc.png" HeightRequest="180" HorizontalOptions="Center" />
+            <Image Source="geoloc.png"
+                   HeightRequest="180"
+                   HorizontalOptions="Center"
+                   SemanticProperties.Description="GeoLoc logo" />
             <Label Text="GeoLoc" Style="{StaticResource Headline}" SemanticProperties.HeadingLevel="Level1" />
-            <Label Text="Detect objects and track their locations. Use the tabs below for live detection, image analysis, and map view." 
-                   FontSize="16" TextColor="Gray" HorizontalTextAlignment="Center" />
+            <Label Text="Detect objects and track their locations. Use the tabs below for live detection, image analysis, and map view."
+                   FontSize="16"
+                   TextColor="Gray"
+                   HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
