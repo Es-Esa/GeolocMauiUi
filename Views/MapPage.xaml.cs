@@ -1,6 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
 using ClientApp.Core.ViewModels;
-using Microsoft.Maui.Controls.Maps;
-using Microsoft.Maui.Maps;
+using Mapsui;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.Utilities;
+
+using Location = Microsoft.Maui.Devices.Sensors.Location;
 
 namespace ClientApp.Views
 {
@@ -24,32 +32,96 @@ namespace ClientApp.Views
         {
             base.OnAppearing();
             await _viewModel.InitializeAsync();
-            mapView.Pins.Clear();
-            Location? firstLocation = null;
-            foreach (var sighting in _viewModel.Sightings)
+            EnsureMapInitialized();
+            UpdateSightingsLayer();
+        }
+
+        private void EnsureMapInitialized()
+        {
+            if (mapView.Map != null)
             {
-                if (sighting.Location != null)
-                {
-                    firstLocation ??= sighting.Location;
-                    var pin = new Pin
-                    {
-                        Label = $"{sighting.ObservationType} ({sighting.Confidence:P0})",
-                        Address = sighting.Timestamp.ToLocalTime().ToString("g"),
-                        Location = sighting.Location,
-                        Type = PinType.Place
-                    };
-                    mapView.Pins.Add(pin);
-                }
+                return;
             }
 
-            if (firstLocation != null)
+            var map = new Map { CRS = "EPSG:3857" };
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            mapView.Map = map;
+        }
+
+        private void UpdateSightingsLayer()
+        {
+            if (mapView.Map == null)
             {
-                mapView.MoveToRegion(MapSpan.FromCenterAndRadius(firstLocation, Distance.FromKilometers(1)));
+                return;
+            }
+
+            var existingLayer = mapView.Map.Layers.FirstOrDefault(layer => layer.Name == SightingsLayerName);
+            if (existingLayer != null)
+            {
+                mapView.Map.Layers.Remove(existingLayer);
+            }
+
+            var features = new List<IFeature>();
+            MPoint? firstPoint = null;
+
+            foreach (var sighting in _viewModel.Sightings)
+            {
+                if (sighting.Location is not Location location)
+                {
+                    continue;
+                }
+
+                var worldPosition = SphericalMercator.FromLonLat(location.Longitude, location.Latitude);
+                firstPoint ??= worldPosition;
+
+                var feature = new PointFeature(worldPosition)
+                {
+                    ["Title"] = $"{sighting.ObservationType} ({sighting.Confidence:P0})",
+                    ["Timestamp"] = sighting.Timestamp.ToLocalTime().ToString("g")
+                };
+
+                feature.Styles.Add(ImageStyles.CreatePinStyle());
+                feature.Styles.Add(new CalloutStyle
+                {
+                    Title = (string)feature["Title"],
+                    Content = (string)feature["Timestamp"]
+                });
+
+                features.Add(feature);
+            }
+
+            if (features.Count > 0)
+            {
+                var sightingsLayer = new MemoryLayer
+                {
+                    Name = SightingsLayerName,
+                    Features = features
+                };
+
+                mapView.Map.Layers.Add(sightingsLayer);
+
+                var boundingBox = CreateBoundingBox(firstPoint!, 1000);
+                mapView.Navigator.ZoomToBox(boundingBox, MBoxFit.Fit);
             }
             else
             {
-                mapView.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(60.1699, 24.9384), Distance.FromKilometers(5)));
+                var defaultCenter = SphericalMercator.FromLonLat(DefaultCenterLongitude, DefaultCenterLatitude);
+                var boundingBox = CreateBoundingBox(defaultCenter, 5000);
+                mapView.Navigator.ZoomToBox(boundingBox, MBoxFit.Fit);
             }
         }
+
+        private static MRect CreateBoundingBox(MPoint center, double radiusMeters)
+        {
+            return new MRect(
+                center.X - radiusMeters,
+                center.Y - radiusMeters,
+                center.X + radiusMeters,
+                center.Y + radiusMeters);
+        }
+
+        private const string SightingsLayerName = "Sightings";
+        private const double DefaultCenterLatitude = 60.1699;
+        private const double DefaultCenterLongitude = 24.9384;
     }
 }

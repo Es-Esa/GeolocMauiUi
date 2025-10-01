@@ -5,10 +5,10 @@
              x:DataType="viewmodels:MapPageViewModel"
              x:Class="ClientApp.Views.MapPage"
              Title="{Binding Title}"
-             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              xmlns:sensors="clr-namespace:Microsoft.Maui.Devices.Sensors;assembly=Microsoft.Maui.Essentials">
 
     <Grid>
-        <maps:Map x:Name="mapView" />
+        <mapsui:MapControl x:Name="mapView" />
     </Grid>
 </ContentPage>

@@ -57,18 +57,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Camera.MAUI" Version="1.4.4" />
-		<!-- Add back Microsoft Maps -->
-		<PackageReference Include="Microsoft.Maui.Controls.Maps" Version="9.0.50" />
-		<!-- Remove non-existent OpenSource package -->
-		<!-- <PackageReference Include="Microsoft.Maui.Controls.OpenSource" Version="9.0.50" /> -->
-		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-preview.3.24172.9" />
-                <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
-                <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="2.88.8" />
-                <!-- Remove Mapsui -->
-                <!-- <PackageReference Include="Mapsui.Maui" Version="4.1.9" /> -->
+                <PackageReference Include="Camera.MAUI" Version="1.4.4" />
+                <PackageReference Include="Mapsui.Maui" Version="5.0.0-rc.1" />
+                <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.50" />
+                <PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
+                <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0-preview.3.24172.9" />
+                <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.0" />
+                <PackageReference Include="SkiaSharp.Views.Maui.Core" Version="3.119.0" />
                 <!-- Restore ML packages -->
                 <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
                 <PackageReference Include="CommunityToolkit.Maui" Version="8.1.0" />
