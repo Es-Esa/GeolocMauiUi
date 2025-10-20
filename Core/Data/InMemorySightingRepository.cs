@@ -19,13 +19,21 @@ namespace ClientApp.Core.Data
         private readonly List<Sighting> _sightings = new();
 
         /// <summary>
+        /// Event raised when a new sighting is added.
+        /// </summary>
+        public event EventHandler<Sighting>? SightingAdded;
+
+        /// <summary>
         /// Add a sighting to the repository.
         /// </summary>
         public Task AddSightingAsync(Sighting sighting)
         {
             _sightings.Add(sighting);
-            // In a real scenario, you might save to a database here
             Console.WriteLine($"Sighting added: {sighting.ObservationType} at {sighting.Location?.Latitude},{sighting.Location?.Longitude}");
+            
+            // Raise the event to notify subscribers
+            SightingAdded?.Invoke(this, sighting);
+            
             return Task.CompletedTask;
         }
 
