@@ -15,6 +15,7 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks><!-- For high-performance frame processing -->
 
 		<!-- Display name -->
 		<ApplicationTitle>ClientApp</ApplicationTitle>
@@ -74,6 +75,13 @@
                 <PackageReference Include="Microsoft.ML.OnnxTransformer" Version="4.0.0" />
                 <!-- Restore Spatial package -->
 		<PackageReference Include="Microsoft.Spatial" Version="8.2.3" />
+	</ItemGroup>
+
+	<!-- Android-specific packages for CameraX high-performance video -->
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+		<PackageReference Include="Xamarin.AndroidX.Camera.Camera2" Version="1.4.0.3" />
+		<PackageReference Include="Xamarin.AndroidX.Camera.Lifecycle" Version="1.4.0.3" />
+		<PackageReference Include="Xamarin.AndroidX.Camera.View" Version="1.4.0.3" />
 	</ItemGroup>
 
 

@@ -17,7 +17,7 @@
             Title="Live detection"
             Route="Detect"
             Icon="detect.png"
-            ContentTemplate="{DataTemplate views:CameraDetectionPage}" />
+            ContentTemplate="{DataTemplate views:CameraDetectionPageV2}" />
 
         <ShellContent
             Title="Map"

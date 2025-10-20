@@ -27,18 +27,33 @@ namespace ClientApp
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            // Core services
             builder.Services.AddSingleton<IObjectDetector, YoloDetector>();
             builder.Services.AddSingleton<ILocationService, LocationService>();
             builder.Services.AddSingleton<ISightingRepository, InMemorySightingRepository>();
             builder.Services.AddSingleton<INavigationService, ShellNavigationService>();
 
+            // High-performance video frame service (platform-specific)
+#if ANDROID
+            builder.Services.AddSingleton<IVideoFrameService, ClientApp.Platforms.Android.Services.AndroidVideoFrameService>();
+#elif IOS
+            // TODO: Implement iOS version
+            // builder.Services.AddSingleton<IVideoFrameService, ClientApp.Platforms.iOS.Services.iOSVideoFrameService>();
+#else
+            // Fallback for other platforms
+            // builder.Services.AddSingleton<IVideoFrameService, FallbackVideoFrameService>();
+#endif
+
+            // ViewModels
             builder.Services.AddTransient<MainPageViewModel>();
             builder.Services.AddTransient<CameraDetectionViewModel>();
             builder.Services.AddTransient<MapPageViewModel>();
             builder.Services.AddTransient<PictureDetectionViewModel>();
 
+            // Pages
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddTransient<CameraDetectionPage>();
+            builder.Services.AddTransient<CameraDetectionPage>(); // Old version
+            builder.Services.AddTransient<CameraDetectionPageV2>(); // New optimized version
             builder.Services.AddTransient<MapPage>();
             builder.Services.AddTransient<PictureDetectionPage>();
 

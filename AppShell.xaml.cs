@@ -10,6 +10,7 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(CameraDetectionPage), typeof(CameraDetectionPage));
+        Routing.RegisterRoute(nameof(CameraDetectionPageV2), typeof(CameraDetectionPageV2));
         Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
         Routing.RegisterRoute(nameof(PictureDetectionPage), typeof(PictureDetectionPage));
     }

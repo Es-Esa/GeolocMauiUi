@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:ClientApp.Core.ViewModels"
+             xmlns:cv="clr-namespace:Camera.MAUI;assembly=Camera.MAUI"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+             x:Class="ClientApp.Views.CameraDetectionPageV2"
+             x:DataType="viewmodels:CameraDetectionViewModel"
+             Title="High-Performance Detection"
+             BackgroundColor="Black">
+
+    <!-- 
+    Optimized camera detection page:
+    - No Camera.MAUI control (uses platform-native video capture)
+    - Async YOLO processing pipeline
+    - 25-30 FPS target with frame skipping
+    -->
+
+    <Grid>
+        <cv:CameraView
+            x:Name="cameraView"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            AutoStartPreview="False"
+            AutoSnapShotAsImageSource="False" />
+
+        <skia:SKCanvasView
+            x:Name="canvasView"
+            PaintSurface="OnCanvasViewPaintSurface"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            IgnorePixelScaling="True"
+            InputTransparent="True" />
+
+        <ActivityIndicator
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}" />
+
+        <VerticalStackLayout VerticalOptions="End" HorizontalOptions="Center" Padding="20">
+            <Label x:Name="statusLabel" Text="Initializing..." TextColor="White" BackgroundColor="#80000000" Padding="10" />
+        </VerticalStackLayout>
+
+        <Label
+            x:Name="fpsLabel"
+            Text="FPS: --"
+            TextColor="Lime"
+            BackgroundColor="#80000000"
+            Padding="12,8"
+            FontSize="16"
+            FontFamily="Consolas"
+            HorizontalOptions="Center"
+            VerticalOptions="Start"
+            Margin="10" />
+    </Grid>
+</ContentPage>

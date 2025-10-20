@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj": {}
+    "D:\\GeolocMauiUi\\ClientApp.csproj": {}
   },
   "projects": {
-    "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj": {
+    "D:\\GeolocMauiUi\\ClientApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj",
+        "projectUniqueName": "D:\\GeolocMauiUi\\ClientApp.csproj",
         "projectName": "ClientApp",
-        "projectPath": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\ClientApp.csproj",
+        "projectPath": "D:\\GeolocMauiUi\\ClientApp.csproj",
         "packagesPath": "C:\\Users\\Esa\\.nuget\\packages\\",
-        "outputPath": "D:\\Drone Geoloc\\ClientApp\\ClientApp\\GeolocUI\\obj\\",
+        "outputPath": "D:\\GeolocMauiUi\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -38,11 +38,11 @@
             "targetAlias": "net9.0-android",
             "projectReferences": {}
           },
-          "net9.0-ios18.5": {
+          "net9.0-ios26.0": {
             "targetAlias": "net9.0-ios",
             "projectReferences": {}
           },
-          "net9.0-maccatalyst18.5": {
+          "net9.0-maccatalyst26.0": {
             "targetAlias": "net9.0-maccatalyst",
             "projectReferences": {}
           },
@@ -79,6 +79,10 @@
               "target": "Package",
               "version": "[8.2.0, )"
             },
+            "Mapsui.Maui": {
+              "target": "Package",
+              "version": "[5.0.0-rc.2, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[9.0.0-preview.3.24172.9, )"
@@ -103,10 +107,6 @@
               "target": "Package",
               "version": "[9.0.50, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[9.0.50, )"
-            },
             "Microsoft.Maui.Essentials": {
               "target": "Package",
               "version": "[9.0.50, )"
@@ -114,7 +114,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.8, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             },
             "Microsoft.Spatial": {
@@ -123,11 +123,23 @@
             },
             "SkiaSharp.Views.Maui.Controls": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             },
             "SkiaSharp.Views.Maui.Core": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
+            },
+            "Xamarin.AndroidX.Camera.Camera2": {
+              "target": "Package",
+              "version": "[1.4.0.3, )"
+            },
+            "Xamarin.AndroidX.Camera.Lifecycle": {
+              "target": "Package",
+              "version": "[1.4.0.3, )"
+            },
+            "Xamarin.AndroidX.Camera.View": {
+              "target": "Package",
+              "version": "[1.4.0.3, )"
             }
           },
           "imports": [
@@ -149,9 +161,9 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         },
-        "net9.0-ios18.5": {
+        "net9.0-ios26.0": {
           "targetAlias": "net9.0-ios",
           "dependencies": {
             "Camera.MAUI": {
@@ -165,6 +177,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.0, )"
+            },
+            "Mapsui.Maui": {
+              "target": "Package",
+              "version": "[5.0.0-rc.2, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -190,10 +206,6 @@
               "target": "Package",
               "version": "[9.0.50, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[9.0.50, )"
-            },
             "Microsoft.Maui.Essentials": {
               "target": "Package",
               "version": "[9.0.50, )"
@@ -201,7 +213,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.8, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             },
             "Microsoft.Spatial": {
@@ -210,11 +222,11 @@
             },
             "SkiaSharp.Views.Maui.Controls": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             },
             "SkiaSharp.Views.Maui.Core": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             }
           },
           "imports": [
@@ -236,9 +248,9 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         },
-        "net9.0-maccatalyst18.5": {
+        "net9.0-maccatalyst26.0": {
           "targetAlias": "net9.0-maccatalyst",
           "dependencies": {
             "Camera.MAUI": {
@@ -252,6 +264,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.0, )"
+            },
+            "Mapsui.Maui": {
+              "target": "Package",
+              "version": "[5.0.0-rc.2, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -277,10 +293,6 @@
               "target": "Package",
               "version": "[9.0.50, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[9.0.50, )"
-            },
             "Microsoft.Maui.Essentials": {
               "target": "Package",
               "version": "[9.0.50, )"
@@ -288,7 +300,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[9.0.8, )",
+              "version": "[9.0.10, )",
               "autoReferenced": true
             },
             "Microsoft.Spatial": {
@@ -297,11 +309,11 @@
             },
             "SkiaSharp.Views.Maui.Controls": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             },
             "SkiaSharp.Views.Maui.Core": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             }
           },
           "imports": [
@@ -324,7 +336,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         },
         "net9.0-windows10.0.19041": {
           "targetAlias": "net9.0-windows10.0.19041.0",
@@ -340,6 +352,10 @@
             "CommunityToolkit.Mvvm": {
               "target": "Package",
               "version": "[8.2.0, )"
+            },
+            "Mapsui.Maui": {
+              "target": "Package",
+              "version": "[5.0.0-rc.2, )"
             },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
@@ -365,10 +381,6 @@
               "target": "Package",
               "version": "[9.0.50, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[9.0.50, )"
-            },
             "Microsoft.Maui.Essentials": {
               "target": "Package",
               "version": "[9.0.50, )"
@@ -379,11 +391,11 @@
             },
             "SkiaSharp.Views.Maui.Controls": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             },
             "SkiaSharp.Views.Maui.Core": {
               "target": "Package",
-              "version": "[2.88.8, )"
+              "version": "[3.119.1, )"
             }
           },
           "imports": [
@@ -411,7 +423,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
