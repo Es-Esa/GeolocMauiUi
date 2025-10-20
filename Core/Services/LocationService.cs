@@ -42,6 +42,12 @@ namespace ClientApp.Core.Services
                 _cancelTokenSource = new CancellationTokenSource();
                 Location? location = await Geolocation.Default.GetLocationAsync(request, _cancelTokenSource.Token);
 
+                if (location == null)
+                {
+                    Debug.WriteLine("Primary geolocation returned null. Trying LastKnownLocation...");
+                    location = await Geolocation.Default.GetLastKnownLocationAsync();
+                }
+
                 return location; 
             }
             catch (FeatureNotSupportedException fnsEx)

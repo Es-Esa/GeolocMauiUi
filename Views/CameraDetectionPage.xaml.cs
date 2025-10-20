@@ -80,7 +80,7 @@ namespace ClientApp.Views
                 {
                     _isCameraStarted = true;
                     statusLabel.Text = "Camera Started. Detecting...";
-                    StartFrameProcessingLoop();
+                    TryStartFrameProcessingLoop();
                 }
             }
         }
@@ -135,7 +135,7 @@ namespace ClientApp.Views
                 await _objectDetector.InitializeAsync();
                 _isDetectorInitialized = true;
                 statusLabel.Text = "Detector Initialized. Waiting for Camera...";
-                StartFrameProcessingLoop();
+                TryStartFrameProcessingLoop();
             }
             catch (Exception ex)
             {
@@ -164,7 +164,7 @@ namespace ClientApp.Views
                     {
                         _isCameraStarted = true;
                         statusLabel.Text = "Camera Started. Detecting...";
-                        StartFrameProcessingLoop();
+                        TryStartFrameProcessingLoop();
                     }
                     else
                     {
@@ -185,16 +185,21 @@ namespace ClientApp.Views
         }
 
         /// <summary>
-        /// Begin periodic frame processing.
+        /// Begin periodic frame processing if prerequisites are met.
         /// </summary>
-        private void StartFrameProcessingLoop()
+        private void TryStartFrameProcessingLoop()
         {
             if (!_isDetectorInitialized || !_isCameraStarted)
             {
+                System.Diagnostics.Debug.WriteLine($"Not starting processing: detectorReady={_isDetectorInitialized}, cameraStarted={_isCameraStarted}");
                 return;
             }
 
-            _frameProcessingTimer?.Dispose();
+            // If already running, don't create another timer
+            if (_frameProcessingTimer != null)
+                return;
+
+            System.Diagnostics.Debug.WriteLine("Starting frame processing timer...");
             _frameProcessingTimer = new System.Threading.Timer(ProcessFrame, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(FrameProcessingIntervalMs));
             _viewModel.IsBusy = false;
             statusLabel.Text = "Detecting...";
@@ -208,6 +213,7 @@ namespace ClientApp.Views
             if (!_isProcessingFrame && _isDetectorInitialized && cameraView.Camera != null)
             {
                 _isProcessingFrame = true;
+                System.Diagnostics.Debug.WriteLine("ProcessFrame tick: starting");
                 Stream? photoStream = null;
                 MemoryStream? processingStream = null;
                 Microsoft.Maui.Graphics.IImage? image = null;
@@ -318,12 +324,12 @@ namespace ClientApp.Views
 
             canvas.Clear();
 
-            if (!_currentDetections.Any() || _frameSize.IsZero || _cameraFeedSize.IsZero)
+            // Always keep frame size in sync
+            _frameSize = new Size(info.Width, info.Height);
+            if (_currentDetections == null || !_currentDetections.Any() || _cameraFeedSize.IsZero)
             {
-                return; 
+                return;
             }
-
-            _frameSize = new Size(info.Width, info.Height); 
 
            
             float scaleX = (float)(_frameSize.Width / _cameraFeedSize.Width);
@@ -343,8 +349,11 @@ namespace ClientApp.Views
             {
                 Style = SKPaintStyle.Fill,
                 Color = SKColors.Yellow,
-                TextSize = 30, 
                 IsAntialias = true
+            };
+            using var textFont = new SKFont
+            {
+                Size = 30
             };
 
             foreach (var box in _currentDetections)
@@ -359,7 +368,7 @@ namespace ClientApp.Views
                 canvas.DrawRect(skRect, boxPaint);
 
                 string label = $"{box.Label}: {box.Score:P1}";
-                canvas.DrawText(label, scaledX, scaledY - 10, textPaint);
+                canvas.DrawText(label, scaledX, scaledY - 10, SKTextAlign.Left, textFont, textPaint);
             }
         }
     }

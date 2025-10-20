@@ -370,8 +370,11 @@ namespace ClientApp.Views
             {
                 Style = SKPaintStyle.Fill,
                 Color = SKColors.Yellow,
-                TextSize = 24,
-                IsAntialias = true,
+                IsAntialias = true
+            };
+            using var textFont = new SKFont
+            {
+                Size = 24,
                 Typeface = SKTypeface.FromFamilyName("Arial", SKFontStyle.Bold)
             };
 
@@ -394,7 +397,7 @@ namespace ClientApp.Views
                 // Label with background
                 string label = $"{box.Label}: {box.Score:P0}";
                 var textBounds = new SKRect();
-                textPaint.MeasureText(label, ref textBounds);
+                textFont.MeasureText(label, out textBounds);
                 
                 var labelRect = new SKRect(
                     x,
@@ -403,7 +406,7 @@ namespace ClientApp.Views
                     y
                 );
                 canvas.DrawRect(labelRect, bgPaint);
-                canvas.DrawText(label, x + 4, y - 4, textPaint);
+                canvas.DrawText(label, x + 4, y - 4, SKTextAlign.Left, textFont, textPaint);
             }
         }
     }

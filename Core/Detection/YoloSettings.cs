@@ -22,7 +22,7 @@ namespace ClientApp.Core.Detection
 		{
 			public const int MaxDetectionsPerInput = 300;
 			public const string UnknownLabel = "unknown";
-			public const float MinConfidence = 0.60f;
+			public const float MinConfidence = 0.25f;
 
 			public struct BoundingBox
 			{
