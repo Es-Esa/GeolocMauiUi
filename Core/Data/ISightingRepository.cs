@@ -11,6 +11,10 @@ namespace ClientApp.Core.Data
     /// </summary>
     public interface ISightingRepository
     {
+        /// <summary>
+        /// Event raised when a new sighting is added.
+        /// </summary>
+        event EventHandler<Sighting>? SightingAdded;
 
         /// <summary>
         /// Add a sighting to the repository.

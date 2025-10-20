@@ -5,7 +5,6 @@ using ClientApp.Views;
 using ClientApp.Core.ViewModels;
 using CommunityToolkit.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Microsoft.Maui.Controls.Maps;
 using ClientApp.Core.Services;
 using ClientApp.Core.Data;
 using ClientApp.Core.Domain;
@@ -22,7 +21,6 @@ namespace ClientApp
                 .UseMauiCameraView()
                 .UseMauiCommunityToolkit()
                 .UseSkiaSharp()
-                .UseMauiMaps()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
